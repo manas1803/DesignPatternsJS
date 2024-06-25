@@ -103,3 +103,8 @@ const gradesCalculation = (function(){
 gradesCalculation.passing()
 ```
 
+ > All the above module pattern have something in common. First they make use of the global variable and secondly they are using functional closure. But there is a problem with this approach. <br>
+ Firstly suppose we have two modules with same name, this can again result in *namespace pollution*<br>
+ Secondly we need to be very sure of the dependencies of various module and according load in correct order 
+
+ 
