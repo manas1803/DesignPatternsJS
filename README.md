@@ -80,3 +80,26 @@ const gradesCalculation = (function(){
 gradesCalculation.passing()
 ```
 
+### Revealing Module Pattern
+It is exactly similar to object interface pattern but in this pattern we make everything private until specifically returned
+
+```js
+const gradesCalculation = (function(){
+  const grades = [98,97,92,87]
+  
+  const passing = ()=>{
+    console.log("You are passing")
+  }
+
+  const failing = ()=>{
+    console.log("You are failing")
+  }
+
+  return {
+    passing:passing
+  }
+})()
+
+gradesCalculation.passing()
+```
+
