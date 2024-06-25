@@ -59,3 +59,4 @@ This method is used by libraries like jQuery. It is exactly similar to the previ
 
 })(globalVariable);
 ```
+
