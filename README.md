@@ -107,4 +107,23 @@ gradesCalculation.passing()
  Firstly suppose we have two modules with same name, this can again result in *namespace pollution*<br>
  Secondly we need to be very sure of the dependencies of various module and according load in correct order 
 
- 
+ ### CommonJS
+ To deal with the above issues we have a new Module pattern that was developed by team of CommonJS and is referred as commonjs method of module export. CommonJS is a volunteer working group that designs and implements JavaScript APIs for declaring modules.
+ <br>
+ Basically in CommonJS what we do is we have a global variable as exports inside module and we assign the module that we want to export to this value.<br> Now in the file where we want to use this module we simply use *require* and the path of the file to reterieve all exports
+<br>
+With CommonJS, each JavaScript file stores modules in its own unique module context (just like wrapping it in a closure). In this scope, we use the module.exports object to expose modules, and require to import them.
+
+ ```js
+function myModule() {
+  this.hello = function() {
+    return 'hello!';
+  }
+
+  this.goodbye = function() {
+    return 'goodbye!';
+  }
+}
+
+module.exports = myModule;
+ ```
