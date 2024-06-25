@@ -12,9 +12,11 @@ So we saw the use of modules, in order to incorporate modules in our project, we
 
 ### Annonymus Closure
 
-Using the annonymus closure method we hide the variables from global namespace and the function is executed as soon as it is invoked
+Using the annonymus closure method we hide the variables from global namespace and the function is executed as soon as it is invoked.What’s nice about this approach is that is that you can use local variables inside this function without accidentally overwriting existing global variables, yet still access the global variables, like so:
+
 
 ```js
+var global = "Hello World"
 (function () {
   var myGrades = [93, 95, 88, 0, 55, 91];
 
@@ -35,5 +37,25 @@ Using the annonymus closure method we hide the variables from global namespace a
   };
 
   console.log(failing());
+  console.log(global)
 })();
+```
+
+### Global Import
+This method is used by libraries like jQuery. It is exactly similar to the previous method with the only difference that the global variable is passed as a parameter. This distinction helps the developer in readability of the code.
+
+```js
+(function (globalVariable) {
+  var privateFunction = function() {
+    console.log('Shhhh, this is private!');
+  }
+    globalVariable.map = function(collection, iterator) {
+    var mapped = [];
+    globalUtils.each(collection, function(value, key, collection) {
+      mapped.push(iterator(value));
+    });
+    return mapped;
+  };
+
+})(globalVariable);
 ```
