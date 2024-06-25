@@ -158,3 +158,33 @@ define([], function() {
   };
 });
 ```
+> The issue with AMD is that code is more verbose to write
+
+### UMD (Universal Module Definition)
+To make use of the best worlds of both i.e. CommonJS and AMD we have yet another module definition method, and that is known as UMD. In UMD according to the situation we have the type of module definition. A typical UMD code can be as :-
+
+```js
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+      // AMD
+    define(['myModule', 'myOtherModule'], factory);
+  } else if (typeof exports === 'object') {
+      // CommonJS
+    module.exports = factory(require('myModule'), require('myOtherModule'));
+  } else {
+    // Browser globals (Note: root is window)
+    root.returnExports = factory(root.myModule, root.myOtherModule);
+  }
+}(this, function (myModule, myOtherModule) {
+  // Methods
+  function notHelloOrGoodbye(){}; // A private method
+  function hello(){}; // A public method because it's returned (see below)
+  function goodbye(){}; // A public method because it's returned (see below)
+
+  // Exposed public methods
+  return {
+      hello: hello,
+      goodbye: goodbye
+  }
+}));
+```
