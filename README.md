@@ -60,3 +60,23 @@ This method is used by libraries like jQuery. It is exactly similar to the previ
 })(globalVariable);
 ```
 
+### Object Interface
+In the object interface approach we return an object with different values that we want to expose outside and the things that we want to keep private we don't return them
+
+```js
+const gradesCalculation = (function(){
+  const grades = [100,98,87,67]
+
+  return{
+    passing: function(){
+      console.log("You are passing")
+    },
+    failing: function(){
+      console.log("You are failing")
+    }
+  }
+})()
+
+gradesCalculation.passing()
+```
+
