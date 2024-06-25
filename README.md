@@ -127,3 +127,34 @@ function myModule() {
 
 module.exports = myModule;
  ```
+
+ > **Issue With CommonJS**<br> The main issue with commonJS approach is that it is synchronous, i.e. all the modules load in the order they are called.While that approach works when working in server(Node) but when working in browser it causes delay and increase in waitTime
+
+ ### AMD(Asynchronous Module Definition) 
+ So to deal with the above issues with CommonJS we have AMD pattern. Here is a piece of code to understand AMD
+
+ ```js
+ define(['myModule', 'myOtherModule'], function(myModule, myOtherModule) {
+  console.log(myModule.hello());
+});
+ ``` 
+Whats happening here is the define method takes in two parameters :- 
+1. An array of dependencies. These dependencies are loaded in the background (in a non-blocking manner), and once loaded define calls the callback function it was given.
+2. A callback function which calls these dependencies as its parameter and we can use the dependencies in our function. 
+
+>**Note** The dependencies in turn needs to be also defined in the same way as the new function
+
+For example *myModule* can look like
+```js
+define([], function() {
+
+  return {
+    hello: function() {
+      console.log('hello');
+    },
+    goodbye: function() {
+      console.log('goodbye');
+    }
+  };
+});
+```
