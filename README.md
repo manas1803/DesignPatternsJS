@@ -1,4 +1,4 @@
-# Webpack Introduction
+# Module Pattern
 
 ## Why Modules ?
 
@@ -256,4 +256,3 @@ const multiply = (num)=>{
 
 export default multiply
 ```
-i
