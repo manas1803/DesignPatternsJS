@@ -223,4 +223,37 @@ export const multiply = (num)=>{
   return num*secretNumber;
 }
 ```
+For a given module we can have multiple named exports/imports
 
+#### Default Exports
+
+For a given module we can only have one default export/import. When using the default export/import along with the already export/import keywords we have default keyword
+
+<br>**Example**
+
+index.js file
+```js
+import {add,num} from "./app.js"
+import multiply from "./app.js"
+
+const addedNumbers = add(3,5)
+const product = multiply(5)
+console.log("Number is ",num)
+```
+app.js file
+```js
+export const num = 10;
+
+export const add = (a,b)=>{
+  return a+b
+}
+
+const secretNumber = 20;
+
+const multiply = (num)=>{
+  return num*secretNumber;
+}
+
+export default multiply
+```
+i
