@@ -6,8 +6,7 @@
 2. Readability: - Modules create a section for specific purpose thus making the code more readable.
 3. Namespacing: - In JS we have the concept of global variables, and global variables are accessible for all, so if we don't have proper encapsulation(which is provided by modules) then we will end up sharing variables across different code where the variable might not be required causing **namespace pollution**.
 
-## Module Pattern 
-
+## Module Pattern
 So we saw the use of modules, in order to incorporate modules in our project, we have different methods: -
 
 ### Annonymus Closure
@@ -187,4 +186,41 @@ To make use of the best worlds of both i.e. CommonJS and AMD we have yet another
       goodbye: goodbye
   }
 }));
+```
+
+### ES6 Modules
+With ES6 the concept of using modules was made very easy looking at the above methodologies that were being used the main reasoning was to make the code writing easy just like CommonJS while keeping the good points of UMD and AMD methods
+
+In ES6 we simply use the `export` keyword to export a given module. The exporting of the module is also divided into two parts :- 
+1. Named Exports
+2. Default Exports
+
+#### Named Exports 
+In named exports we since start adding `export` keyword to each and every `function` or `variable` that needs to be exported and utilised in some other module or file.
+**Example**
+
+---
+title: Use tabs to organize content
+output: html_document
+---
+
+You can turn parallel sections to tabs in `html_document` output.
+
+## Results {.tabset}
+
+### Plots
+
+We show a scatter plot in this section.
+
+```{r, fig.dim=c(5, 3)}
+par(mar = c(4, 4, .5, .1))
+plot(mpg ~ hp, data = mtcars, pch = 19)
+```
+
+### Tables
+
+We show the data in this tab.
+
+```{r}
+head(mtcars)
 ```
