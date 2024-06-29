@@ -202,7 +202,7 @@ In named exports we since start adding `export` keyword to each and every `funct
 
 index.js file
 ```js
-import {add,multiply,num} from "./app.js"
+import {add,multiply,num} from "./app"
 
 
 const addedNumbers = add(3,5)
@@ -233,8 +233,8 @@ For a given module we can only have one default export/import. When using the de
 
 index.js file
 ```js
-import {add,num} from "./app.js"
-import multiply from "./app.js"
+import multiply, { add, num } from "./app";
+
 
 const addedNumbers = add(3,5)
 const product = multiply(5)
