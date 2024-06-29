@@ -258,3 +258,56 @@ export default multiply
 ```
 
 # Singleton Pattern
+In singleton design pattern we restrict the instantiation of certain classes to one single instance. This single instance is unmodifiable and can be accessed globally throughout the application.
+
+## Implementation 
+
+### Classes
+Creating a singleton with an ES15 classes can be done as follows
+
+```js
+let instance;
+class Counter {
+  constructor(){
+    if(instance){
+      throw new Error("Instance already present")
+    }
+    this.counter=counter;
+    instance=this;
+  }
+
+  getCount(){
+    return this.counter;
+  }
+
+  increment(){
+    return ++this.counter;
+  }
+
+  decrement(){
+    return --this.counter
+  }
+}
+
+const singletonCounter = Object.freeze(new Counter())
+export default singletonCounter;
+```
+
+> **What is this Object.freeze()**<br> the method object freeze is there to stop the mutation of any object that has been created. Like `const` is there to stop the re-declaration of a variable, but when we create an object the using `const`, reference cannot be changed, but we can still mutate the object, so to avoid that we have `Object.freeze()`
+
+### Objects
+We can even use Objects to create singleton design pattern without using the classes.
+
+```js
+let counter=0;
+const counterObject = {
+  getCount:()=>counter;
+  increment:()=>counter++;
+  decrement:()=>counter--;
+}
+
+const singletonCounter = Object.freeze(counterObject)
+export default singletonCounter
+```
+
+> **Very Important**<br> Unnecessary: ES2015 Modules are singletons by default. We no longer need to explicitly create singletons to achieve this global, non-modifiable behavior.
