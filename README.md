@@ -197,30 +197,30 @@ In ES6 we simply use the `export` keyword to export a given module. The exportin
 
 #### Named Exports 
 In named exports we since start adding `export` keyword to each and every `function` or `variable` that needs to be exported and utilised in some other module or file.
-**Example**
 
----
-title: Use tabs to organize content
-output: html_document
----
+<br>**Example**
 
-You can turn parallel sections to tabs in `html_document` output.
+index.js file
+```js
+import {add,multiply,num} from "./app.js"
 
-## Results {.tabset}
 
-### Plots
+const addedNumbers = add(3,5)
+const product = multiply(5)
+console.log("Number is ",num)
+```
+app.js file
+```js
+export const num = 10;
 
-We show a scatter plot in this section.
+export const add = (a,b)=>{
+  return a+b
+}
 
-```{r, fig.dim=c(5, 3)}
-par(mar = c(4, 4, .5, .1))
-plot(mpg ~ hp, data = mtcars, pch = 19)
+const secretNumber = 20;
+
+export const multiply = (num)=>{
+  return num*secretNumber;
+}
 ```
 
-### Tables
-
-We show the data in this tab.
-
-```{r}
-head(mtcars)
-```
