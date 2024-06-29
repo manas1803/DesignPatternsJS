@@ -256,3 +256,5 @@ const multiply = (num)=>{
 
 export default multiply
 ```
+
+# Singleton Pattern
