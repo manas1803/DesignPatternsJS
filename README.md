@@ -1,13 +1,11 @@
-# Module Pattern
+# Design Patterns Using Javascript
 
-## Why Modules ?
+## Module Pattern
+Using Module as a design pattern is very commmon. There are various reasons to go for modules. Few of them are follows
 
 1. Maintainiability: - Modules can be added and removed according to use case without disturbing the whole code
 2. Readability: - Modules create a section for specific purpose thus making the code more readable.
 3. Namespacing: - In JS we have the concept of global variables, and global variables are accessible for all, so if we don't have proper encapsulation(which is provided by modules) then we will end up sharing variables across different code where the variable might not be required causing **namespace pollution**.
-
-## Module Pattern
-So we saw the use of modules, in order to incorporate modules in our project, we have different methods: -
 
 ### Annonymus Closure
 
@@ -382,4 +380,5 @@ const batmanProxy = new Proxy(person,{
 ```
 
 ## Real-World Example
-A credit card is a proxy for a bank account, which is a proxy for a bundle of cash. Both implement the same interface: they can be used for making a payment. A consumer feels great because there’s no need to carry loads of cash around. A shop owner is also happy since the income from a transaction gets added electronically to the shop’s bank account without the risk of losing the deposit or getting robbed on the way to the bank.
+A credit card is a proxy for a bank account, which is a proxy for a bundle of cash. Both implement the same interface: they can be used for making a payment.
+
