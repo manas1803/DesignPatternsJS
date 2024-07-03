@@ -260,7 +260,13 @@ export default multiply
 # Singleton Pattern
 In singleton design pattern we restrict the instantiation of certain classes to one single instance. This single instance is unmodifiable and can be accessed globally throughout the application.
 
+## Problem Solved
+1. To provide single instance to a class
+2. Provide a global access point to that class
+
 ## Implementation 
+1. Make default constructor private, to prevent other objects from using it
+2. Create a static creation method that acts as a constructor
 
 ### Classes
 Creating a singleton with an ES15 classes can be done as follows
@@ -268,29 +274,30 @@ Creating a singleton with an ES15 classes can be done as follows
 ```js
 let instance;
 class Counter {
-  constructor(){
-    if(instance){
-      throw new Error("Instance already present")
+  constructor(counter) {
+    if (instance) {
+      throw new Error("Instance already exists");
     }
     this.counter=counter;
     instance=this;
   }
-
-  getCount(){
+  getCounter(){
     return this.counter;
   }
 
   increment(){
-    return ++this.counter;
+    return this.increment++;
   }
 
   decrement(){
-    return --this.counter
+    return this.increment--;
   }
+
 }
 
-const singletonCounter = Object.freeze(new Counter())
-export default singletonCounter;
+const singletonClassCounter = Object.freeze(new Counter())
+export default singletonClassCounter;
+
 ```
 
 > **What is this Object.freeze()**<br> the method object freeze is there to stop the mutation of any object that has been created. Like `const` is there to stop the re-declaration of a variable, but when we create an object the using `const`, reference cannot be changed, but we can still mutate the object, so to avoid that we have `Object.freeze()`
@@ -311,3 +318,14 @@ export default singletonCounter
 ```
 
 > **Very Important**<br> Unnecessary: ES2015 Modules are singletons by default. We no longer need to explicitly create singletons to achieve this global, non-modifiable behavior.
+
+## Real-World Analogy 
+The government is an excellent example of the Singleton Pattern. A country can have only one official government.
+
+# Proxy Pattern
+The idea of the proxy pattern is very straight forward, we will not use directly the object, but rather an intermediate object, that in turn will return us the values. <br>For example sake its just like when we use **proxy** for our attendance, we use someone else on our behalf rather than being present ourselves.<br>We can simple use the `Proxy` inbuilt object of JS to use the `proxy` pattern.
+
+**Example**
+```js
+
+```
