@@ -268,7 +268,7 @@ In singleton design pattern we restrict the instantiation of certain classes to 
 1. Make default constructor private, to prevent other objects from using it
 2. Create a static creation method that acts as a constructor
 
-### Classes
+### Using Classes
 Creating a singleton with an ES15 classes can be done as follows
 
 ```js
@@ -302,7 +302,7 @@ export default singletonClassCounter;
 
 > **What is this Object.freeze()**<br> the method object freeze is there to stop the mutation of any object that has been created. Like `const` is there to stop the re-declaration of a variable, but when we create an object the using `const`, reference cannot be changed, but we can still mutate the object, so to avoid that we have `Object.freeze()`
 
-### Objects
+### Using Objects
 We can even use Objects to create singleton design pattern without using the classes.
 
 ```js
@@ -319,13 +319,67 @@ export default singletonCounter
 
 > **Very Important**<br> Unnecessary: ES2015 Modules are singletons by default. We no longer need to explicitly create singletons to achieve this global, non-modifiable behavior.
 
-## Real-World Analogy 
+## Real-World Example 
 The government is an excellent example of the Singleton Pattern. A country can have only one official government.
 
 # Proxy Pattern
 The idea of the proxy pattern is very straight forward, we will not use directly the object, but rather an intermediate object, that in turn will return us the values. <br>For example sake its just like when we use **proxy** for our attendance, we use someone else on our behalf rather than being present ourselves.<br>We can simple use the `Proxy` inbuilt object of JS to use the `proxy` pattern.
 
+## Problem 
+When we have a massive object that we need to access time to time but not always, so for that we should only initialize this object when needed. But this can cause code duplication, so proxy pattern comes to rescue.
+
+## Implementation
+The Proxy pattern suggests that you create a new proxy class with the same interface as an original service object. Then you update your app so that it passes the proxy object to all of the original object’s clients.
+
+### Using Target
 **Example**
 ```js
+const person = {
+  name:"Bruce",
+  age: 34,
+  email:"darkKnight@gotham.com",
+  city:"Gotham",
+  country:"USA"
+}
 
+const batmanProxy = new Proxy(person,{
+  get:(target,prop)=>{
+    console.log("Target is ",target)
+    return target[prop]
+  },
+  set:(target,prop,value)=>{
+    target[prop]=value
+    console.log("Value is ",value)
+    return true
+  }
+})
 ```
+### Using Reflect
+We have another way of `getting` object value as well as `setting` it. This can be achieved using `Reflect` method.<br>
+Instead of accessing properties through `obj[prop]` or setting properties through `obj[prop] = value`, we can access or modify properties on the target object through `Reflect.get()` and `Reflect.set()`.
+
+**Example**
+```js
+const person = {
+  name:"Bruce",
+  age: 34,
+  email:"darkKnight@gotham.com",
+  city:"Gotham",
+  country:"USA"
+}
+
+const batmanProxy = new Proxy(person,{
+  get:(target,prop)=>{
+    console.log("Target is ",target)
+    return Reflect.get(target,prop)
+  },
+  set:(target,prop,value)=>{
+    Reflect.set(target,prop,value)
+    console.log("Value is ",value)
+    return true
+  }
+})
+```
+
+## Real-World Example
+A credit card is a proxy for a bank account, which is a proxy for a bundle of cash. Both implement the same interface: they can be used for making a payment. A consumer feels great because there’s no need to carry loads of cash around. A shop owner is also happy since the income from a transaction gets added electronically to the shop’s bank account without the risk of losing the deposit or getting robbed on the way to the bank.
