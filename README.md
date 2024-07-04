@@ -382,3 +382,31 @@ const batmanProxy = new Proxy(person,{
 ## Real-World Example
 A credit card is a proxy for a bank account, which is a proxy for a bundle of cash. Both implement the same interface: they can be used for making a payment.
 
+# Observer Pattern
+The basic idea of observer pattern is that, a stream of events are currently happening and if the user is interested then they can get the information, if they have subscribed to the event.<br> If we take a basic analogy, suppose you want a new brand of phone, now you cannot go to the store everyday, rather its better if you get notified when the smartphone is available<br> This is what followed in observer pattern.<br>The Observer pattern suggests that you add a subscription mechanism to the publisher class so individual objects can subscribe to or unsubscribe from a stream of events coming from that publisher.<br>
+**What is this publisher class?**
+Basically, the object which emits all the events continuous as stream of data is called publisher, now all of the users may not want the data, so only those who `subscribe` to the data receives it, and those who subscribe are known as `consumers`.
+
+## Problem
+If you are interested in some stream of data that continuosly notifies you but you don't want others to access the same, since they don't want the data, then in that case we use the observer pattern
+
+## Implementation
+We can simply create an array of observers and create an object that has notify, subscribe and unsubscribe methods.
+
+```js
+let observers=[]
+export default Object.freeze({
+  notify:(data)=>observers.forEach((observer)=>observer(data)),
+  subscribe:(func)=>observers.push(func),
+  unsubscribe:(func)=>{
+    [...observers].forEach((observer,index)=>{
+      if(observer===func){
+        observers.splice(index,1)
+      }
+    })
+  }
+})
+```
+
+## Real-World Example
+If you subscribe to a newspaper or magazine, you no longer need to go to the store to check if the next issue is available.
