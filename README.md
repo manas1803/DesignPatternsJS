@@ -441,4 +441,62 @@ const dog2 = new Dog("Sam", 2);
 ## Real-World Example
 In real life, prototypes are used for performing various tests before starting mass production of a product
 
-# Container/Presentation Pattern
+# Container/Presentation Pattern(REACT)
+Container and Presentation pattern is basically a design pattern in `React`. In this pattern we just normally try to separate the code concerns. So basically we create a `container` that handles all the `data` related code, like code related to redux and state, while the `presentation` part takes care of how the data will look in **UI**.
+
+## Problem 
+If we want to keep both the data/api logic and UI logic we can use the design pattern. This helps in testing and debugging the issues properly
+
+## Implementation
+
+``` jsx
+import React from "react";
+import { LoadingListings, Listing, ListingsGrid } from "../components";
+
+function ListingsContainerComponent() {
+  const [listings, setListings] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch("https://my.cms.com/listings")
+      .then((res) => res.json())
+      .then((res) => setListings(res.listings));
+  }, []);
+
+  return <Listings listings={listings} />;
+}
+
+function ListingsPresentationalComponent(props) {
+  if (props.listings.length === 0) {
+    return <LoadingListings />;
+  }
+
+  return (
+    <ListingsGrid>
+      {listings.map((listing) => (
+        <Listing listing={listing} />
+      ))}
+    </ListingsGrid>
+  );
+}
+```
+
+# HOC(Higher-Order Components) Pattern
+The basic idea of `HOC` pattern is that we create a component and then that component gets wrapped by another component. Based on some logic either we do some changes to this component or render the same component as it is. The component is passed as a prop to the higher order component
+
+## Implementation
+```jsx
+
+function withLargerFontSize(Component){
+  return (props)=>{
+    const style = {
+      fontSize:"1.5rem",
+      ...props.style
+    };
+    return (<Component {...props} style={style}>)
+  }
+}
+
+const Text = () => <p style={{ fontFamily: "Inter" }}>Hello world!</p>;
+const StyledText = withLargerFontSize(Text);
+
+```
