@@ -440,3 +440,5 @@ const dog2 = new Dog("Sam", 2);
 
 ## Real-World Example
 In real life, prototypes are used for performing various tests before starting mass production of a product
+
+# Container/Presentation Pattern
