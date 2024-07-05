@@ -1,4 +1,4 @@
-# Design Patterns Using Javascript
+# Design Patterns In Javascript
 
 ## Module Pattern
 Using Module as a design pattern is very commmon. There are various reasons to go for modules. Few of them are follows
@@ -482,7 +482,7 @@ function ListingsPresentationalComponent(props) {
 }
 ```
 
-## HOC(Higher-Order Components) Pattern(REACT)
+## HOC(Higher-Order Components) Pattern
 The basic idea of `HOC` pattern is that we create a component and then that component gets wrapped by another component. Based on some logic either we do some changes to this component or render the same component as it is. The component is passed as a prop to the higher order component
 
 ### Implementation
@@ -502,5 +502,35 @@ const Text = () => <p style={{ fontFamily: "Inter" }}>Hello world!</p>;
 const StyledText = withLargerFontSize(Text);
 
 ```
-## Render Props Pattern(REACT)
-In this design 
+## Render Props Pattern
+In this design pattern we basically pass a component as a `prop` and this component can receive props of the parent component as well. It is different from `HOC` method where we just pass component as prop and then wrap it around with some small changes
+
+```jsx
+import React, { useState } from "react";
+
+function Input(props) {
+  const [value, setValue] = useState(0);
+
+  return (
+    <>
+      <input type="number" onChange={(e) => setValue(e.target.value)} />
+      {props.renderKelvin({ value: Number(value) + 273 })}
+      {props.renderFahrenheit({ value: (value * 9) / 5 + 32 })}
+    </>
+  );
+}
+
+function App() {
+  const renderKelvin = ({value}) => <div>The value is {value}</div>;
+  const renderFahrenheit = ({value}) => <div>The value is {value}</div>;
+
+  return (
+    <div className="App">
+      <Input renderKelvin={renderKelvin} renderFahrenheit={renderFahrenheit} />
+    </div>
+  );
+}
+
+export default App;
+
+```
