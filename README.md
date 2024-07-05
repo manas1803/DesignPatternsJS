@@ -410,3 +410,33 @@ export default Object.freeze({
 
 ## Real-World Example
 If you subscribe to a newspaper or magazine, you no longer need to go to the store to check if the next issue is available.
+
+# Prototype Pattern
+In a scenario when we have similar type of objects and we want to copy most of the data from that object to new object in that case we use prototype pattern. What we do basically is we create a generic object, since most of the things are going to be same, and then we derieve other objects from this object.
+
+## Problem
+The Prototype pattern delegates the cloning process to the actual objects that are being cloned. The pattern declares a common interface for all objects that support cloning. 
+
+## Implementation
+
+``` js
+class Dog {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  bark() {
+    console.log(`${this.name} is barking!`);
+  }
+  wagTail() {
+    console.log(`${this.name} is wagging their tail!`);
+  }
+}
+
+const dog1 = new Dog("Max", 4);
+const dog2 = new Dog("Sam", 2);
+```
+
+## Real-World Example
+In real life, prototypes are used for performing various tests before starting mass production of a product
