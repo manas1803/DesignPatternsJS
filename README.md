@@ -505,6 +505,8 @@ const StyledText = withLargerFontSize(Text);
 ## Render Props Pattern
 In this design pattern we basically pass a component as a `prop` and this component can receive props of the parent component as well. It is different from `HOC` method where we just pass component as prop and then wrap it around with some small changes
 
+### Implementation
+
 ```jsx
 import React, { useState } from "react";
 
@@ -533,4 +535,56 @@ function App() {
 
 export default App;
 
+```
+
+## Hooks Pattern
+When we see the above two patterns, the concept of hooks pattern becomes more significant, since now using the hooks pattern we can simply avoid the above two patterns.<br> React Hooks are functions special types of functions that you can use in order to:
+1. Add state to a functional component
+2. Reuse stateful logic among multiple components throughout the app.
+3. Manage a component's lifecycle
+
+So what we can do is, wherever we find similar kind of logic(be it related to data) we can separate that out using our own custom hooks.
+
+### Implementation
+
+```jsx
+export function useHover() {
+  const [isHovering, setIsHovering] = React.useState(false);
+  const ref = React.useRef(null);
+
+  const handleMouseOver = () => setIsHovering(true);
+  const handleMouseOut = () => setIsHovering(false);
+
+  React.useEffect(() => {
+    const node = ref.current;
+    if (node) {
+      node.addEventListener("mouseover", handleMouseOver);
+      node.addEventListener("mouseout", handleMouseOut);
+      return () => {
+        node.removeEventListener("mouseover", handleMouseOver);
+        node.removeEventListener("mouseout", handleMouseOut);
+      };
+    }
+  }, [ref.current]);
+
+  return [ref, isHovering];
+}
+
+import { useHover } from "../hooks/useHover";
+
+export function Listing() {
+  const [ref, isHovering] = useHover();
+
+  React.useEffect(() => {
+    if (isHovering) {
+      console.log("Its hovering")
+    }
+  }, [isHovering]);
+
+  return (
+    <div ref={ref}>
+      <ListingCard />
+    </div>
+  );
+}
 ```
